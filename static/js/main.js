@@ -353,11 +353,14 @@ function runLayout(animate = true) {
     }
 
     const layout = cy.layout({
-        name: "breadthfirst",
-        roots: root && root.length ? [root.id()] : undefined,
-        directed: false,
-        padding: 96,
-        spacingFactor: 1.35,
+        name: "cose",
+        padding: 64,
+        nodeRepulsion: () => 12000,
+        idealEdgeLength: () => 90,
+        nodeOverlap: 24,
+        componentSpacing: 100,
+        gravity: 0.6,
+        numIter: 1500,
         animate,
         animationDuration: animate ? 420 : 0,
         fit: false,
