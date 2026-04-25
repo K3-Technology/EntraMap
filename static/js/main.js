@@ -353,14 +353,20 @@ function runLayout(animate = true) {
     }
 
     const layout = cy.layout({
-        name: "cose",
-        padding: 64,
-        nodeRepulsion: () => 12000,
-        idealEdgeLength: () => 90,
-        nodeOverlap: 24,
-        componentSpacing: 100,
-        gravity: 0.6,
-        numIter: 1500,
+        name: "concentric",
+        concentric: node => {
+            const t = node.data("type");
+            if (t === "user")      return 5;
+            if (t === "device")    return 4;
+            if (t === "group")     return 3;
+            if (t === "app")       return 2;
+            if (t === "ca_policy") return 1;
+            return 0;
+        },
+        levelWidth: () => 1,
+        minNodeSpacing: 18,
+        avoidOverlap: true,
+        spacingFactor: 1.0,
         animate,
         animationDuration: animate ? 420 : 0,
         fit: false,
